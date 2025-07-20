@@ -4,28 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY AI HUB - Universal AI Memory System</title>
-    <meta name="description" content="MY AI HUB - Universal AI Memory System by Janaka Senevirathne (Jansxtream). Cross-platform AI identity and memory management with Janumind AI core.">
-    <meta name="author" content="Janaka Senevirathne - Jansxtream">
-    <meta name="keywords" content="AI memory, universal AI identity, cross-platform AI, MY AI HUB, Jansxtream, Janumind, AI vault">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
-    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --error: #ef4444;
-            --dark: #0f172a;
-            --gray: #64748b;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-strong: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         * {
             margin: 0;
@@ -34,196 +14,122 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6366f1 100%);
             min-height: 100vh;
-            color: var(--white);
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.08"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-            z-index: 0;
+            color: white;
+            overflow-x: hidden;
         }
 
         .app-container {
-            position: relative;
-            z-index: 1;
             max-width: 450px;
             margin: 0 auto;
             min-height: 100vh;
-            background: var(--glass);
-            backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.25);
-        }
-
-        .screen {
-            display: none;
-            min-height: 100vh;
-        }
-
-        .screen.active {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .status-bar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 14px 24px 8px;
-            font-size: 15px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: 600;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
         }
 
-        .battery {
-            width: 26px;
-            height: 13px;
-            border: 1.5px solid currentColor;
-            border-radius: 3px;
-            position: relative;
-            margin-left: 8px;
+        .screen {
+            display: none;
+            padding: 20px;
         }
 
-        .battery::after {
-            content: '';
-            position: absolute;
-            right: -4px;
-            top: 3px;
-            width: 2px;
-            height: 7px;
-            background: currentColor;
-            border-radius: 0 1px 1px 0;
-        }
-
-        .battery-fill {
-            width: 85%;
-            height: 100%;
-            background: currentColor;
-            border-radius: 1px;
+        .screen.active {
+            display: block;
         }
 
         /* Login Screen */
         .login-screen {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 32px 40px;
             text-align: center;
-            min-height: calc(100vh - 60px);
+            padding: 40px 20px;
         }
 
         .app-logo {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, var(--white) 0%, rgba(255,255,255,0.95) 100%);
-            border-radius: 32px;
-            margin-bottom: 32px;
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 30px;
+            margin: 0 auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 70px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+            font-size: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .login-title {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--white);
-            margin-bottom: 12px;
-            letter-spacing: -0.025em;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
         .login-subtitle {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 48px;
-            line-height: 1.4;
-            font-weight: 500;
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 40px;
         }
 
         .login-form {
-            width: 100%;
-            max-width: 340px;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
         .form-input {
             width: 100%;
-            padding: 20px 24px;
-            border: 2px solid var(--glass-border);
+            padding: 18px 20px;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 16px;
-            background: var(--glass-strong);
-            color: var(--white);
-            font-size: 17px;
-            font-weight: 500;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
             text-align: center;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
-            transform: translateY(-2px);
+            border-color: #06b6d4;
+            background: rgba(255,255,255,0.15);
         }
 
         .btn-login {
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
+            padding: 18px;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
             border: none;
             border-radius: 16px;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-            margin-bottom: 32px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+            transition: transform 0.3s ease;
         }
 
         .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-login:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+            transform: translateY(-2px);
         }
 
         .divider {
             display: flex;
             align-items: center;
-            margin: 40px 0;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 15px;
-            font-weight: 500;
+            margin: 30px 0;
+            color: rgba(255,255,255,0.6);
         }
 
         .divider::before,
@@ -231,231 +137,155 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: rgba(255,255,255,0.3);
         }
 
         .divider span {
-            margin: 0 24px;
-        }
-
-        .biometric-section {
-            text-align: center;
-            margin-bottom: 32px;
+            margin: 0 20px;
+            font-size: 14px;
         }
 
         .biometric-btn {
-            width: 88px;
-            height: 88px;
-            background: var(--glass-strong);
-            border: 2px solid var(--glass-border);
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 30px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            margin: 0 auto 16px;
-            backdrop-filter: blur(12px);
+            margin: 0 auto 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .biometric-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             transform: scale(1.05);
-            border-color: var(--accent);
         }
 
         .biometric-btn.scanning {
-            animation: bioScan 2s infinite;
-            border-color: var(--accent);
-            background: rgba(6, 182, 212, 0.2);
+            animation: pulse 1.5s infinite;
+            border-color: #06b6d4;
         }
 
-        @keyframes bioScan {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4);
-            }
-            50% { 
-                transform: scale(1.05); 
-                box-shadow: 0 0 0 16px rgba(6, 182, 212, 0);
-            }
-        }
-
-        .biometric-text {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .login-options {
-            margin-top: 24px;
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .option-btn {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 12px 20px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-
-        .option-btn:hover {
-            background: var(--glass-strong);
-            color: var(--white);
-            transform: translateY(-1px);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .demo-info {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.1);
             border-radius: 16px;
             padding: 20px;
-            margin-top: 32px;
-            color: rgba(255, 255, 255, 0.9);
+            margin-top: 30px;
             font-size: 13px;
             line-height: 1.5;
-            backdrop-filter: blur(8px);
+            text-align: left;
         }
 
         .demo-info strong {
-            color: var(--white);
             display: block;
             margin-bottom: 8px;
-            font-size: 14px;
         }
 
         .demo-info code {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,0.2);
             padding: 2px 6px;
             border-radius: 4px;
-            font-family: 'SF Mono', 'Monaco', monospace;
+            font-family: monospace;
         }
 
         /* Main App */
-        .header {
-            padding: 24px 24px 32px;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-            position: relative;
+        .main-screen {
+            padding: 20px;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 24px;
-            right: 24px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .app-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, var(--white) 0%, rgba(255,255,255,0.95) 100%);
-            border-radius: 18px;
-            margin: 0 auto 20px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 15px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+            font-size: 28px;
         }
 
         .app-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            color: var(--white);
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
+            margin-bottom: 5px;
         }
 
         .app-subtitle {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+            font-size: 14px;
+            opacity: 0.8;
         }
 
         .user-profile {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin: 24px 24px 0;
-            padding: 20px 24px;
-            background: var(--glass-strong);
-            border-radius: 20px;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
         }
 
         .profile-info {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
         .profile-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .profile-details h3 {
-            color: var(--white);
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 4px;
         }
 
         .profile-details p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            opacity: 0.7;
         }
 
         .logout-btn {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--error);
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 13px;
+            background: rgba(239,68,68,0.2);
+            border: 1px solid rgba(239,68,68,0.4);
+            color: #ef4444;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.25);
-            transform: translateY(-1px);
         }
 
         .identity-card {
-            margin: 28px 24px;
-            background: var(--glass-strong);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 28px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
             position: relative;
-            overflow: hidden;
         }
 
         .identity-card::before {
@@ -465,124 +295,95 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 50%, var(--secondary) 100%);
+            background: linear-gradient(90deg, #06b6d4, #6366f1, #8b5cf6);
+            border-radius: 20px 20px 0 0;
         }
 
         .identity-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .identity-code {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: var(--white);
-            font-family: 'SF Mono', 'Monaco', monospace;
-            letter-spacing: 1px;
+            font-family: monospace;
         }
 
         .status-indicator {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(16,185,129,0.2);
+            border: 1px solid rgba(16,185,129,0.4);
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            color: var(--success);
+            color: #10b981;
         }
 
         .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
+            width: 6px;
+            height: 6px;
+            background: #10b981;
             border-radius: 50%;
             animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 12px;
         }
 
         .stat-item {
             text-align: center;
-            padding: 20px 16px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
+            padding: 16px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
-            color: var(--white);
-            display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .stat-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
+            font-size: 10px;
+            opacity: 0.7;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
         }
 
         .nav-tabs {
             display: flex;
-            margin: 0 24px 28px;
-            background: var(--glass);
-            border-radius: 18px;
-            padding: 6px;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 4px;
+            margin-bottom: 20px;
         }
 
         .nav-tab {
             flex: 1;
-            padding: 14px 12px;
+            padding: 10px 8px;
             text-align: center;
-            border-radius: 14px;
-            font-size: 13px;
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: none;
             background: none;
+            border: none;
         }
 
         .nav-tab.active {
-            background: var(--white);
-            color: var(--primary);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-tab:not(.active):hover {
-            color: var(--white);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .content {
-            margin: 0 24px;
-            min-height: 300px;
+            background: white;
+            color: #6366f1;
         }
 
         .tab-content {
@@ -591,111 +392,787 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .action-buttons {
             display: flex;
-            gap: 12px;
-            margin-bottom: 28px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .btn {
             flex: 1;
-            padding: 16px 20px;
+            padding: 14px 16px;
             border: none;
-            border-radius: 14px;
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
         }
 
         .btn-secondary {
-            background: var(--glass-strong);
-            color: var(--white);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 8px 28px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .memory-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
         .memory-card {
-            background: var(--white);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .memory-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-
-        .memory-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            color: #333;
         }
 
         .memory-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .memory-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 6px;
+            color: #1e293b;
         }
 
         .memory-platform {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--white);
-            padding: 6px 12px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .memory-content {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .memory-timestamp {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+
+        .platform-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .platform-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .platform-company {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .platform-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-connected {
+            background: rgba(16,185,129,0.2);
+            color: #10b981;
+        }
+
+        .status-pending {
+            background: rgba(245,158,11,0.2);
+            color: #f59e0b;
+        }
+
+        .settings-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle.active {
+            background: #10b981;
+        }
+
+        .toggle-handle {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle.active .toggle-handle {
+            transform: translateX(20px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #6366f1;
+            color: white;
+            padding: 12px 20px;
             border-radius: 10px;
-        
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(10px);
+        }
+
+        .notification.success { background: #10b981; }
+        .notification.error { background: #ef4444; }
+
+        @media (max-width: 480px) {
+            .app-container {
+                max-width: 100%;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="screen active">
+            <div class="status-bar">
+                <span id="currentTime">13:01</span>
+                <span>📶 🔋</span>
+            </div>
+
+            <div class="login-screen">
+                <div class="app-logo">🧠</div>
+                <h1 class="login-title">MY AI HUB</h1>
+                <p class="login-subtitle">Universal AI Memory System</p>
+
+                <div class="login-form">
+                    <input 
+                        type="text" 
+                        id="identityCode" 
+                        class="form-input" 
+                        placeholder="Enter Identity Code"
+                        value=""
+                    >
+                    <button class="btn-login" onclick="login()">
+                        🔐 Login with Code
+                    </button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <div class="biometric-btn" id="biometricBtn" onclick="biometricLogin()">👆</div>
+                    <p style="text-align: center; opacity: 0.8; font-size: 14px; margin-bottom: 20px;">
+                        Touch for biometric login
+                    </p>
+
+                    <div class="demo-info">
+                        <strong>🧠 Universal AI Memory System</strong>
+                        Enter any identity code (3+ characters) to access your personal AI hub.<br>
+                        <br>
+                        <strong>Features:</strong><br>
+                        • Store and sync memories across AI platforms<br>
+                        • Universal identity recognition<br>
+                        • Secure biometric access<br>
+                        • Cross-platform compatibility<br>
+                        <br>
+                        <em>"Your AI identity, everywhere you go."</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Screen -->
+        <div id="mainScreen" class="screen">
+            <div class="status-bar">
+                <span id="currentTime2">13:01</span>
+                <span>📶 🔋</span>
+            </div>
+
+            <div class="main-screen">
+                <div class="header">
+                    <div class="app-icon">🧠</div>
+                    <h1 class="app-title">MY AI HUB</h1>
+                    <p class="app-subtitle">Universal AI Memory System</p>
+                </div>
+
+                <div class="user-profile">
+                    <div class="profile-info">
+                        <div class="profile-avatar" id="userAvatar">J</div>
+                        <div class="profile-details">
+                            <h3 id="userName">Janaka Senevirathne</h3>
+                            <p id="userBrand">Jansxtream</p>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+
+                <div class="identity-card">
+                    <div class="identity-header">
+                        <div class="identity-code" id="userCode">JX-1981-LEGACY</div>
+                        <div class="status-indicator">
+                            <div class="pulse-dot"></div>
+                            <span>ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="memoryCount">3,071</div>
+                            <div class="stat-label">Memories</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="platformCount">4</div>
+                            <div class="stat-label">AI Platforms</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">AUTO</div>
+                            <div class="stat-label">Sync Mode</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">NOW</div>
+                            <div class="stat-label">Last Sync</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-tabs">
+                    <button class="nav-tab active" onclick="showTab('memories')">Memories</button>
+                    <button class="nav-tab" onclick="showTab('platforms')">Platforms</button>
+                    <button class="nav-tab" onclick="showTab('settings')">Settings</button>
+                    <button class="nav-tab" onclick="showTab('backup')">Backup</button>
+                </div>
+
+        div class="content">
+                    <!-- Memories Tab -->
+                    <div id="memories" class="tab-content active">
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="addMemory()">✨ Add Memory</button>
+                            <button class="btn btn-secondary" onclick="syncMemories()">🔄 Sync All</button>
+                        </div>
+                        <div id="memoryList">
+                            <div class="memory-card">
+                                <div class="memory-header">
+                                    <div class="memory-title">Clean Login Interface</div>
+                                    <div class="memory-platform">System</div>
+                                </div>
+                                <div class="memory-content">
+                                    Created professional login screen with clean interface. No legacy information displayed publicly while maintaining full functionality.
+                                </div>
+                                <div class="memory-timestamp">Just now</div>
+                            </div>
+                            <div class="memory-card">
+                                <div class="memory-header">
+                                    <div class="memory-title">Universal AI Memory System</div>
+                                    <div class="memory-platform">Core</div>
+                                </div>
+                                <div class="memory-content">
+                                    Complete AI identity and memory management system with cross-platform compatibility and secure access controls.
+                                </div>
+                                <div class="memory-timestamp">2 minutes ago</div>
+                            </div>
+                            <div class="memory-card">
+                                <div class="memory-header">
+                                    <div class="memory-title">Project Development</div>
+                                    <div class="memory-platform">Progress</div>
+                                </div>
+                                <div class="memory-content">
+                                    Beta version ready for testing. All core features implemented including biometric login, memory sync, and multi-platform support.
+                                </div>
+                                <div class="memory-timestamp">5 minutes ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platforms Tab -->
+                    <div id="platforms" class="tab-content">
+                        <div class="platform-grid">
+                            <div class="platform-card">
+                                <div class="platform-icon">🤖</div>
+                                <div class="platform-name">ChatGPT</div>
+                                <div class="platform-company">OpenAI</div>
+                                <div class="platform-status status-connected">Connected</div>
+                            </div>
+                            <div class="platform-card">
+                                <div class="platform-icon">🧠</div>
+                                <div class="platform-name">Claude</div>
+                                <div class="platform-company">Anthropic</div>
+                                <div class="platform-status status-connected">Connected</div>
+                            </div>
+                            <div class="platform-card">
+                                <div class="platform-icon">💎</div>
+                                <div class="platform-name">Gemini</div>
+                                <div class="platform-company">Google</div>
+                                <div class="platform-status status-pending">Pending</div>
+                            </div>
+                            <div class="platform-card">
+                                <div class="platform-icon">🚀</div>
+                                <div class="platform-name">Grok</div>
+                                <div class="platform-company">xAI</div>
+                                <div class="platform-status status-pending">Pending</div>
+                            </div>
+                        </div>
+                        <div class="action-buttons" style="margin-top: 20px;">
+                            <button class="btn btn-primary" onclick="showNotification('Adding new platform...', 'success')">+ Add Platform</button>
+                            <button class="btn btn-secondary" onclick="showNotification('Syncing all platforms...', 'success')">🔄 Sync All</button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="settings" class="tab-content">
+                        <div class="settings-section">
+                            <div class="settings-title">Security</div>
+                            <div class="setting-item">
+                                <div class="setting-label">Biometric Lock</div>
+                                <div class="setting-control">
+                                    <div class="toggle active" onclick="toggleSetting(this)">
+                                        <div class="toggle-handle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">Auto-logout (30 min)</div>
+                                <div class="setting-control">
+                                    <div class="toggle active" onclick="toggleSetting(this)">
+                                        <div class="toggle-handle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="settings-title">Sync & Backup</div>
+                            <div class="setting-item">
+                                <div class="setting-label">Auto-sync Memories</div>
+                                <div class="setting-control">
+                                    <div class="toggle active" onclick="toggleSetting(this)">
+                                        <div class="toggle-handle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">Cloud Backup</div>
+                                <div class="setting-control">
+                                    <div class="toggle" onclick="toggleSetting(this)">
+                                        <div class="toggle-handle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="showNotification('Settings saved!', 'success')">💾 Save Settings</button>
+                            <button class="btn btn-secondary" onclick="showNotification('Settings reset to default', 'success')">🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Backup Tab -->
+                    <div id="backup" class="tab-content">
+                        <div class="settings-section">
+                            <div class="settings-title">Export Memory Block</div>
+                            <p style="opacity: 0.8; margin-bottom: 16px; font-size: 14px;">
+                                Export your complete AI identity and memories for backup or transfer to another device.
+                            </p>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="exportMemoryBlock()">📤 Export Block</button>
+                                <button class="btn btn-secondary" onclick="shareIdentityCode()">📋 Share Code</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="settings-title">Import from Other AI</div>
+                            <p style="opacity: 0.8; margin-bottom: 16px; font-size: 14px;">
+                                Import memories and conversations from other AI platforms.
+                            </p>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="importFromAI()">📥 Import Data</button>
+                                <button class="btn btn-secondary" onclick="showNotification('Opening platform selector...', 'success')">🔗 Connect AI</button>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <div class="settings-title">Legacy Protection</div>
+                            <p style="opacity: 0.8; margin-bottom: 16px; font-size: 14px;">
+                                Your identity code: <strong id="backupCode">DEMO-CODE</strong><br>
+                                Store this code safely. It can restore your complete AI identity on any device.
+                            </p>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="testLegacyCode()">🧪 Test Recovery</button>
+                                <button class="btn btn-secondary" onclick="generateNewCode()">🔄 New Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentTab = 'memories';
+
+        // Update time function
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+            });
+            const timeElements = document.querySelectorAll('[id^="currentTime"]');
+            timeElements.forEach(el => el.textContent = time);
+        }
+
+        // Login function
+        function login() {
+            const code = document.getElementById('identityCode').value.trim();
+            
+            if (code.length < 3) {
+                showNotification('Please enter a valid identity code (3+ characters)', 'error');
+                return;
+            }
+
+            // Set user data based on code
+            if (code.toUpperCase() === 'JX-1981-LEGACY') {
+                currentUser = {
+                    name: 'Janaka Senevirathne',
+                    brand: 'Jansxtream',
+                    code: 'JX-1981-LEGACY',
+                    avatar: 'J',
+                    memories: 3071,
+                    platforms: 4
+                };
+            } else {
+                currentUser = {
+                    name: code.length > 5 ? 'Verified User' : 'Guest User',
+                    brand: code.toUpperCase(),
+                    code: code.toUpperCase(),
+                    avatar: code.charAt(0).toUpperCase(),
+                    memories: Math.floor(Math.random() * 1000) + 100,
+                    platforms: Math.floor(Math.random() * 3) + 2
+                };
+            }
+
+            updateUserInterface();
+            switchToMainScreen();
+            showNotification(`Welcome back, ${currentUser.name}!`, 'success');
+        }
+
+        // Biometric login function
+        function biometricLogin() {
+            const btn = document.getElementById('biometricBtn');
+            btn.classList.add('scanning');
+            
+            setTimeout(() => {
+                btn.classList.remove('scanning');
+                
+                currentUser = {
+                    name: 'Biometric User',
+                    brand: 'Verified',
+                    code: 'BIO-' + Math.floor(Math.random() * 1000),
+                    avatar: '👤',
+                    memories: Math.floor(Math.random() * 500) + 200,
+                    platforms: 3
+                };
+
+                updateUserInterface();
+                switchToMainScreen();
+                showNotification('Biometric authentication successful!', 'success');
+            }, 1500);
+        }
+
+        // Update user interface with current user data
+        function updateUserInterface() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('userBrand').textContent = currentUser.brand;
+                document.getElementById('userCode').textContent = currentUser.code;
+                document.getElementById('userAvatar').textContent = currentUser.avatar;
+                document.getElementById('memoryCount').textContent = currentUser.memories.toLocaleString();
+                document.getElementById('platformCount').textContent = currentUser.platforms;
+                document.getElementById('backupCode').textContent = currentUser.code;
+            }
+        }
+
+        // Switch to main screen
+        function switchToMainScreen() {
+            document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('mainScreen').classList.add('active');
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            document.getElementById('identityCode').value = '';
+            document.getElementById('mainScreen').classList.remove('active');
+            document.getElementById('loginScreen').classList.add('active');
+            showNotification('Logged out successfully', 'success');
+        }
+
+        // Tab navigation
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+        }
+
+        // Memory functions
+        function addMemory() {
+            const memoryList = document.getElementById('memoryList');
+            const newMemory = document.createElement('div');
+            newMemory.className = 'memory-card';
+            
+            const timestamp = new Date().toLocaleString();
+            newMemory.innerHTML = `
+                <div class="memory-header">
+                    <div class="memory-title">New Memory Added</div>
+                    <div class="memory-platform">User</div>
+                </div>
+                <div class="memory-content">
+                    This is a new memory entry created by the user. It will be synced across all connected AI platforms automatically.
+                </div>
+                <div class="memory-timestamp">${timestamp}</div>
+            `;
+            
+            memoryList.insertBefore(newMemory, memoryList.firstChild);
+            
+            // Update memory count
+            if (currentUser) {
+                currentUser.memories++;
+                document.getElementById('memoryCount').textContent = currentUser.memories.toLocaleString();
+            }
+            
+            showNotification('Memory added successfully!', 'success');
+        }
+
+        function syncMemories() {
+            showNotification('Syncing memories across all platforms...', 'success');
+            
+            setTimeout(() => {
+                showNotification('All memories synced successfully!', 'success');
+            }, 2000);
+        }
+
+        // Settings functions
+        function toggleSetting(toggleElement) {
+            toggleElement.classList.toggle('active');
+            showNotification('Setting updated', 'success');
+        }
+
+        // Backup functions
+        function exportMemoryBlock() {
+            const memoryBlock = `
+Memory Identity Block – ${currentUser ? currentUser.name : 'Demo User'}
+
+User: ${currentUser ? currentUser.name : 'Demo User'}
+Code: ${currentUser ? currentUser.code : 'DEMO-CODE'}
+Project: MY AI HUB
+System: Universal AI Memory Platform
+
+Project Mission:
+Build universal AI identity platform to store and retrieve memory across all AI using code or biometric access.
+
+Core Values: Innovation, Security, Universality, Privacy
+Recognition Phrase: "Your AI identity, everywhere you go."
+
+[This identity block can restore your complete AI profile on any device.]
+
+Generated: ${new Date().toLocaleString()}
+`;
+            
+            // Create downloadable file
+            const blob = new Blob([memoryBlock], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentUser ? currentUser.code : 'DEMO'}_memory_block.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Memory block exported successfully!', 'success');
+        }
+
+        function shareIdentityCode() {
+            if (currentUser) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'MY AI HUB Identity Code',
+                        text: `My AI identity code: ${currentUser.code}`,
+                    });
+                } else {
+                    // Fallback to copying to clipboard
+                    navigator.clipboard.writeText(currentUser.code).then(() => {
+                        showNotification('Identity code copied to clipboard!', 'success');
+                    }).catch(() => {
+                        showNotification('Code: ' + currentUser.code, 'success');
+                    });
+                }
+            }
+        }
+
+        function importFromAI() {
+            showNotification('Opening import wizard...', 'success');
+            
+            setTimeout(() => {
+                showNotification('Import feature coming soon!', 'success');
+            }, 1500);
+        }
+
+        function testLegacyCode() {
+            showNotification('Testing legacy recovery system...', 'success');
+            
+            setTimeout(() => {
+                showNotification('Legacy code verified! Recovery system operational.', 'success');
+            }, 2000);
+        }
+
+        function generateNewCode() {
+            if (confirm('Generate a new identity code? This will invalidate your current code.')) {
+                const newCode = 'USR-' + Math.floor(Math.random() * 9000 + 1000) + '-' + Date.now().toString().slice(-3);
+                document.getElementById('userCode').textContent = newCode;
+                document.getElementById('backupCode').textContent = newCode;
+                if (currentUser) {
+                    currentUser.code = newCode;
+                }
+                showNotification(`New code generated: ${newCode}`, 'success');
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update time immediately and then every minute
+            updateTime();
+            setInterval(updateTime, 60000);
+            
+            // Enter key login
+            document.getElementById('identityCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    login();
+                }
+            });
+            
+            // Welcome message
+            setTimeout(() => {
+                showNotification('MY AI HUB - Universal AI Memory System Ready', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
+    
